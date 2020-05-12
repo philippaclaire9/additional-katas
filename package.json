@@ -1,0 +1,30 @@
+{
+  "name": "fe-b4-katas",
+  "version": "1.0.0",
+  "description": "katas",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest multiplicationTable.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/northcoders/CORE-B1-katas.git"
+  },
+  "author": "Northcoders",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/northcoders/CORE-B1-katas/issues"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "husky": "^0.14.3",
+    "jest": "^23.5.0"
+  },
+  "homepage": "https://github.com/northcoders/CORE-B1-katas#readme",
+  "keywords": []
+}
