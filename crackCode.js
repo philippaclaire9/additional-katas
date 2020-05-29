@@ -1,6 +1,39 @@
 // Please do not change the name of this function
 const crackCode = (encryptedKey) => {
-  // Your code here
-}
+  if (!encryptedKey) return false;
 
-module.exports = { crackCode }
+  const splitKey = encryptedKey.split('-');
+  splitKey.pop();
+
+  const code = encryptedKey.slice(-5, -1).split('');
+
+  let count = 0;
+  //console.log(code, 'pre');
+  const alphabeticalCode = [...code].sort();
+  console.log(alphabeticalCode, code);
+  //console.log(code.sort());
+  // const keyObject = {};
+
+  if ([...code].sort() !== code) {
+    return false;
+  } else {
+    code.forEach((letter) => {
+      console.log("we're here");
+      splitKey.forEach((element) => {
+        //keyObject[element] = element.length;
+        if (element[0] === letter) {
+          count++;
+        }
+      });
+    });
+  }
+  //console.log(keyObject);
+  // console.log(keyObject);
+  console.log(count, 'count');
+  if (count === code.length) {
+    return true;
+  }
+  console.log(code.length);
+};
+
+module.exports = { crackCode };
