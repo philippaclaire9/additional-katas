@@ -8,17 +8,19 @@ const crackCode = (encryptedKey) => {
   const code = encryptedKey.slice(-5, -1).split('');
 
   let count = 0;
-  //console.log(code, 'pre');
+
   const alphabeticalCode = [...code].sort();
   console.log(alphabeticalCode, code);
+  console.log(alphabeticalCode.join(''), code.join(''), 'joined');
   //console.log(code.sort());
   // const keyObject = {};
 
-  if ([...code].sort() !== code) {
+  //console.log([...code].sort().join(''));
+
+  if (alphabeticalCode.join('') !== code.join('')) {
     return false;
   } else {
     code.forEach((letter) => {
-      console.log("we're here");
       splitKey.forEach((element) => {
         //keyObject[element] = element.length;
         if (element[0] === letter) {
