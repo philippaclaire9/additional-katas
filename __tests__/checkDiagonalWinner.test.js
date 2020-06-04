@@ -49,7 +49,7 @@ describe('checkDiagonalWinner()', () => {
       ])
     ).toEqual(false);
   });
-  it('returns false if no winner when 4 in a row down', () => {
+  xit('returns false if no winner when 4 in a row down', () => {
     expect(
       checkDiagonalWinner([
         [null, null, null, null, null, null, null],
@@ -60,5 +60,17 @@ describe('checkDiagonalWinner()', () => {
         [null, 'o', null, null, null, null, null],
       ])
     ).toEqual(false);
+  });
+  it('returns false if no winner when 4 in a row down', () => {
+    expect(
+      checkDiagonalWinner([
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, 'x', null, null, null],
+        [null, null, 'x', null, null, null, null],
+        [null, 'x', null, null, null, null, null],
+        ['x', null, null, null, null, null, null],
+      ])
+    ).toEqual(true);
   });
 });
