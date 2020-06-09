@@ -17,9 +17,9 @@ const checkDiagonalWinner = (board) => {
   let arrayIndex = 0;
   let letter = '';
   let counterCount = 0;
-  let diagonalCounter = 0;
-  let diagonalIndex = 0;
-  let diagonalArray = 0;
+
+  const isNotNull = (value) => value !== null;
+  const letterIndexArray = [];
 
   board.forEach((array) => {
     if (board.indexOf(array) !== 0) {
@@ -28,51 +28,45 @@ const checkDiagonalWinner = (board) => {
     if (!array.includes('x') && !array.includes('o')) {
       count++;
     } else {
-      const isNotNull = (value) => value !== null;
       valueIndex = array.findIndex(isNotNull);
-      letter = array[valueIndex];
+      if (!letter) {
+        letter = array[valueIndex];
+      }
+      if (array[valueIndex] === letter) {
+        letterIndexArray.push(valueIndex);
+      } else {
+        invalidBoard = true;
+      }
 
       if (array[valueIndex + 1] !== null) {
         invalidBoard = true;
       }
-      //console.log(board[arrayIndex + 1][valueIndex] === letter, 'letter?');
-      // console.log(board[arrayIndex] !== 5, 'five?');
+
       if (board[arrayIndex][valueIndex] === letter) {
         counterCount++;
         if (counterCount === 4) {
           invalidBoard = true;
         }
-        // console.log(arrayIndex + 1);
-        //console.log(board[arrayIndex + 1]);
-        //console.log('here?');
-        // console.log(secondInvalidBoard, 'pre');
-        //secondInvalidBoard = true;
-        // console.log(secondInvalidBoard, 'post');
-      }
-
-      //console.log(board[arrayIndex + 1][valueIndex - 1] === letter, valueIndex);
-      if (
-        valueIndex !== 0 &&
-        board[arrayIndex + 1][valueIndex - 1] === letter
-      ) {
-        diagonalCounter++;
-        //console.log(diagonalCounter);
-        if (diagonalCounter === 3) {
-          diagonalWinner = true;
-        }
-      }
-      console.log(valueIndex === 1, board[arrayIndex + 1][0] === letter);
-      if (valueIndex === 1 && board[arrayIndex + 1][0] === letter) {
-        diagonalCounter++;
-        diagonalWinner = true;
-        console.log(diagonalCounter, 'counter?');
       }
     }
-
-    //if(array[valueIndex] !== null && array )
+  });
+  const differenceArray = letterIndexArray.map(function (n, i) {
+    if (i !== letterIndexArray.length - 1) {
+      return n - letterIndexArray[i + 1];
+    }
+    if (letterIndexArray[0] > letterIndexArray[letterIndexArray.length - 1]) {
+      return 1;
+    } else {
+      return -1;
+    }
   });
 
-  //console.log(secondInvalidBoard);
+  const isDifferencePos = differenceArray.every((value) => value == 1);
+  const isDifferenceNeg = differenceArray.every((value) => value == -1);
+
+  if (differenceArray.length === 4 && isDifferenceNeg) return true;
+  if (differenceArray.length === 4 && isDifferencePos) return true;
+
   if (diagonalWinner) return true;
 
   if (invalidBoard) return false;
