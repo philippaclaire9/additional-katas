@@ -69,6 +69,18 @@ describe('findConnectFourWinner()', () => {
         [null, 'o', 'x', 'o', null, null, null],
         [null, 'o', 'x', 'o', null, null, null],
       ])
+    ).toEqual('x');
+  });
+  it('Returns winning team when vertical winner', () => {
+    expect(
+      findConnectFourWinner([
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, 'x', null, null, null, null],
+        [null, null, 'x', 'x', 'x', null, null],
+        [null, null, 'o', 'o', 'o', 'o', null],
+      ])
     ).toEqual('o');
   });
 });

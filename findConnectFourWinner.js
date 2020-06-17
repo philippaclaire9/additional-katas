@@ -6,7 +6,8 @@ const findConnectFourWinner = (board) => {
   if (board.length !== 6) return 'Please provide a 7 * 6 matrix';
   let invalidBoard = false;
   let diagonalWinner = false;
-  let verticalWinner = false;
+  let oVerticalWinner = false;
+  let xVerticalWinner = false;
   let noWinner = true;
 
   board.forEach((array) => {
@@ -64,7 +65,7 @@ const findConnectFourWinner = (board) => {
         oVerticalCount++;
         //console.log(oVerticalCount);
         if (oVerticalCount === 4) {
-          verticalWinner = true;
+          oVerticalWinner = true;
           // console.log(verticalWinner);
         }
       }
@@ -73,7 +74,7 @@ const findConnectFourWinner = (board) => {
         xVerticalCount++;
         //console.log(oVerticalCount);
         if (xVerticalCount === 4) {
-          verticalWinner = true;
+          xVerticalWinner = true;
           //console.log(verticalWinner);
         }
       }
@@ -103,7 +104,9 @@ const findConnectFourWinner = (board) => {
 
   if (count === 6) return false;
 
-  if (verticalWinner) return 'o';
+  if (oVerticalWinner) return 'o';
+
+  if (xVerticalWinner) return 'x';
 
   if (noWinner) return false;
 
