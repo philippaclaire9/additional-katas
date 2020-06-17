@@ -8,6 +8,8 @@ const findConnectFourWinner = (board) => {
   let diagonalWinner = false;
   let oVerticalWinner = false;
   let xVerticalWinner = false;
+  let oHorizontalWinner = false;
+  let xHorizontalWinner = false;
   let noWinner = true;
 
   board.forEach((array) => {
@@ -25,6 +27,7 @@ const findConnectFourWinner = (board) => {
   let x = '';
   let oVerticalCount = 0;
   let xVerticalCount = 0;
+
   let letter = '';
 
   const isO = (value) => value === 'o';
@@ -53,29 +56,34 @@ const findConnectFourWinner = (board) => {
         xIndexArray.push(xValueIndex);
       }
 
-      //else {
-      //   invalidBoard = true;
-      // }
+      if (
+        array[oValueIndex + 1] === 'o' &&
+        array[oValueIndex + 2] === 'o' &&
+        array[oValueIndex + 3] === 'o'
+      ) {
+        oHorizontalWinner = true;
+      }
 
-      // if (array[valueIndex + 1] !== null) {
-      //   invalidBoard = true;
-      // }
+      if (
+        array[xValueIndex + 1] === 'x' &&
+        array[xValueIndex + 2] === 'x' &&
+        array[xValueIndex + 3] === 'x'
+      ) {
+        xHorizontalWinner = true;
+      }
 
-      if (board[arrayIndex][oValueIndex] === 'o') {
+      if (arrayIndex !== 5 && board[arrayIndex + 1][oValueIndex] === 'o') {
         oVerticalCount++;
-        //console.log(oVerticalCount);
         if (oVerticalCount === 4) {
           oVerticalWinner = true;
-          // console.log(verticalWinner);
         }
       }
 
-      if (board[arrayIndex][xValueIndex] === 'x') {
+      if (arrayIndex !== 5 && board[arrayIndex + 1][xValueIndex] === 'x') {
         xVerticalCount++;
-        //console.log(oVerticalCount);
+
         if (xVerticalCount === 4) {
           xVerticalWinner = true;
-          //console.log(verticalWinner);
         }
       }
     }
@@ -97,7 +105,16 @@ const findConnectFourWinner = (board) => {
   // if (differenceArray.length === 4 && isDifferenceNeg) return true;
   // if (differenceArray.length === 4 && isDifferencePos) return true;
 
-  // console.log(diagonalWinner, invalidBoard, count === 6, verticalWinner);
+  console.log(
+    diagonalWinner,
+    invalidBoard,
+    count === 6,
+    xHorizontalWinner,
+    oHorizontalWinner,
+    xVerticalWinner,
+    oVerticalWinner,
+    noWinner
+  );
   // if (diagonalWinner) return true;
 
   if (invalidBoard) return false;
@@ -107,6 +124,10 @@ const findConnectFourWinner = (board) => {
   if (oVerticalWinner) return 'o';
 
   if (xVerticalWinner) return 'x';
+
+  if (oHorizontalWinner) return 'o';
+  //console.log(xHorizontalWinner);
+  if (xHorizontalWinner) return 'x';
 
   if (noWinner) return false;
 

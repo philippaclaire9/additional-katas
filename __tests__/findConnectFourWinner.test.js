@@ -49,7 +49,7 @@ describe('findConnectFourWinner()', () => {
       ])
     ).toEqual(false);
   });
-  it('Returns counter winner when vertical winner', () => {
+  it.only('Returns counter winner when vertical winner', () => {
     expect(
       findConnectFourWinner([
         [null, null, null, null, null, null, null],
@@ -60,6 +60,8 @@ describe('findConnectFourWinner()', () => {
         [null, 'x', 'o', 'x', null, null, null],
       ])
     ).toEqual('o');
+  });
+  it.only('Returns counter winner when vertical winner', () => {
     expect(
       findConnectFourWinner([
         [null, null, null, null, null, null, null],
@@ -71,7 +73,7 @@ describe('findConnectFourWinner()', () => {
       ])
     ).toEqual('x');
   });
-  it('Returns winning team when vertical winner', () => {
+  it('Returns winning team when horizontal winner', () => {
     expect(
       findConnectFourWinner([
         [null, null, null, null, null, null, null],
@@ -82,5 +84,29 @@ describe('findConnectFourWinner()', () => {
         [null, null, 'o', 'o', 'o', 'o', null],
       ])
     ).toEqual('o');
+  });
+  it('Returns winning team when horizontal winner', () => {
+    expect(
+      findConnectFourWinner([
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, 'o', null, null, null, null],
+        [null, null, 'o', 'x', 'x', null, null],
+        [null, null, 'x', 'x', 'x', 'x', null],
+      ])
+    ).toEqual('x');
+  });
+  it.only('Returns winning team when diagonal winner', () => {
+    expect(
+      findConnectFourWinner([
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, 'x', null, null, null],
+        [null, null, 'x', 'o', null, null, null],
+        [null, 'x', 'o', 'x', null, null, null],
+        ['x', 'x', 'o', 'o', null, null, 'o'],
+      ])
+    ).toEqual('x');
   });
 });
