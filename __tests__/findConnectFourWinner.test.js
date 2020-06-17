@@ -1,10 +1,10 @@
 const { findConnectFourWinner } = require('../findConnectFourWinner');
 
 describe('findConnectFourWinner()', () => {
-  xit('Returns Please provide a 7 * 6 matrix if no matrix provided', () => {
+  it('Returns Please provide a 7 * 6 matrix if no matrix provided', () => {
     expect(findConnectFourWinner([])).toEqual('Please provide a 7 * 6 matrix');
   });
-  xit('Returns Please provide a 7 * 6 matrix matrix dimensions are incorrect', () => {
+  it('Returns Please provide a 7 * 6 matrix matrix dimensions are incorrect', () => {
     expect(
       findConnectFourWinner([
         [null, null, null, null, null, null, null],
@@ -25,7 +25,7 @@ describe('findConnectFourWinner()', () => {
       ])
     ).toEqual('Please provide a 7 * 6 matrix');
   });
-  xit('Returns false when no winner when board is null', () => {
+  it('Returns false when no winner when board is null', () => {
     expect(
       findConnectFourWinner([
         [null, null, null, null, null, null, null],
@@ -48,5 +48,27 @@ describe('findConnectFourWinner()', () => {
         [null, 'x', 'o', 'x', null, null, null],
       ])
     ).toEqual(false);
+  });
+  it('Returns counter winner when vertical winner', () => {
+    expect(
+      findConnectFourWinner([
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, 'o', null, null, null, null],
+        [null, null, 'o', null, null, null, null],
+        [null, 'x', 'o', 'x', null, null, null],
+        [null, 'x', 'o', 'x', null, null, null],
+      ])
+    ).toEqual('o');
+    expect(
+      findConnectFourWinner([
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, 'x', null, null, null, null],
+        [null, null, 'x', null, null, null, null],
+        [null, 'o', 'x', 'o', null, null, null],
+        [null, 'o', 'x', 'o', null, null, null],
+      ])
+    ).toEqual('o');
   });
 });
