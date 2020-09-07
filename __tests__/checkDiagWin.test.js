@@ -61,7 +61,7 @@ describe('checkDiagWin()', () => {
       ])
     ).toEqual(false);
   });
-  it('returns true when diagonal winner', () => {
+  it.only('returns true when diagonal winner', () => {
     expect(
       checkDiagWin([
         [null, null, null, null, null, null, null],
@@ -71,6 +71,16 @@ describe('checkDiagWin()', () => {
         [null, 'x', null, null, null, null, null],
         ['x', null, null, null, null, null, null],
       ])
-    ).toEqual(true);
+    ).toEqual('x');
+    expect(
+      checkDiagWin([
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, 'o', null, null, null, null],
+        [null, null, null, 'o', null, null, null],
+        [null, null, null, null, 'o', null, null],
+        [null, null, null, null, null, 'o', null],
+      ])
+    ).toEqual('o');
   });
 });

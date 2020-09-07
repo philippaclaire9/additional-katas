@@ -26,9 +26,12 @@ const checkDiagWin = (board) => {
   let spaceIndex = 0;
   let horizontalSpaceIndex = 0;
   let verticalSpaceIndex = 0;
+  let diagonalSpaceIndex = 0;
   let rowIndex = 0;
   let horizontalCounters = 1;
   let verticalCounters = 0;
+
+  let diagonalCounters = 0;
 
   board.forEach((row) => {
     rowIndex++;
@@ -39,6 +42,7 @@ const checkDiagWin = (board) => {
           spaceIndex = row.indexOf(space);
           horizontalSpaceIndex = row.indexOf(space);
           verticalSpaceIndex = row.indexOf(space);
+          diagonalSpaceIndex = row.indexOf(space);
           rowIndex = board.indexOf(row);
         }
       });
@@ -68,7 +72,30 @@ const checkDiagWin = (board) => {
         }
       }
     }
+    if (currentPlayer) {
+      if (rowIndex <= 4) {
+        if (board[rowIndex + 1][diagonalSpaceIndex - 1] === currentPlayer) {
+          diagonalCounters++;
+          diagonalSpaceIndex--;
+        }
+        if (board[rowIndex + 1][diagonalSpaceIndex + 1] === currentPlayer) {
+          diagonalCounters++;
+          diagonalSpaceIndex++;
+        }
+      }
+
+      if (rowIndex === 5) {
+        if (board[rowIndex][diagonalSpaceIndex] === currentPlayer) {
+          diagonalCounters++;
+        }
+      }
+      //   console.log(diagonalSpaceIndex, diagonalCounters);
+    }
   });
+
+  if (diagonalCounters === 4) {
+    return currentPlayer;
+  }
 
   if (verticalCounters === 4) {
     return false;
