@@ -61,7 +61,7 @@ describe('checkDiagWin()', () => {
       ])
     ).toEqual(false);
   });
-  it.only('returns true when diagonal winner', () => {
+  it('returns true when diagonal winner', () => {
     expect(
       checkDiagWin([
         [null, null, null, null, null, null, null],

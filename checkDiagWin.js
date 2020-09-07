@@ -1,26 +1,15 @@
 const checkDiagWin = (board) => {
   if (!board.length) return 'Please provide a 7*6 matrix';
-  let rowCounter = 0;
-  board.forEach((row) => {
-    rowCounter++;
-  });
-  if (rowCounter != 6) {
-    return 'Please provide a 7*6 matrix';
-  }
+  if (board.length !== 6) return 'Please provide a 7*6 matrix';
 
-  let spaceCounter = 0;
-  let incorrectSpaces = false;
+  let invalidBoard = false;
 
   board.forEach((row) => {
-    spaceCounter = 0;
-    row.forEach((space) => {
-      spaceCounter++;
-    });
-    if (spaceCounter !== 7) {
-      incorrectSpaces = true;
+    if (row.length !== 7) {
+      invalidBoard = true;
     }
   });
-  if (incorrectSpaces) return 'Please provide a 7*6 matrix';
+  if (invalidBoard) return 'Please provide a 7*6 matrix';
 
   let currentPlayer = '';
   let spaceIndex = 0;
