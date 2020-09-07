@@ -19,8 +19,8 @@ const checkDiagWin = (board) => {
   let rowIndex = 0;
   let horizontalCounters = 1;
   let verticalCounters = 0;
-
   let diagonalCounters = 0;
+  let noWinner = false;
 
   board.forEach((row) => {
     rowIndex++;
@@ -93,6 +93,9 @@ const checkDiagWin = (board) => {
     return false;
   }
   if (!currentPlayer) return false;
+
+  noWinner = true;
+  if (noWinner) return false;
 };
 
 module.exports = { checkDiagWin };
