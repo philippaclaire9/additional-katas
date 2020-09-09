@@ -18,11 +18,13 @@ const findC4Winner = (board) => {
   let verticalIndexX = 0;
   let horizontalIndexX = 0;
   let verticalCounterX = 0;
+  let horizontalCounterX = 0;
   let spaceIndexO = 0;
   let rowIndexO = 0;
   let verticalIndexO = 0;
   let verticalCounterO = 0;
   let horizontalIndexO = 0;
+  let horizontalCounterO = 0;
 
   const checkVerticals = () => {
     if (currentO) {
@@ -41,7 +43,44 @@ const findC4Winner = (board) => {
     }
   };
 
-  const checkHorizontals = () => {};
+  const checkHorizontals = (row) => {
+    if (currentO) {
+      row.forEach((space) => {
+        // console.log(rowIndexO, horizontalIndexO + 1);
+        if (board[rowIndexO][horizontalIndexO + 1] === currentO) {
+          horizontalCounterO++;
+          horizontalIndexO++;
+          // console.log(horizontalCounterO);
+        }
+      });
+    }
+
+    if (currentX) {
+      row.forEach((space) => {
+        if (board[rowIndexX][horizontalIndexX + 1] === currentX) {
+          horizontalCounterX++;
+          horizontalIndexX++;
+          // console.log(horizontalCounterX);
+        }
+      });
+
+      if (horizontalCounterX !== 3) {
+        if (rowIndexX <= 4) {
+          if (board[rowIndexX + 1].includes('x')) {
+            horizontalIndexX = board[rowIndexX + 1].findIndex((x) => x === 'x');
+            horizontalCounterX = 0;
+            row.forEach((space) => {
+              if (board[rowIndexX + 1][horizontalIndexX + 1] === currentX) {
+                horizontalCounterX++;
+                horizontalIndexX++;
+              }
+            });
+          }
+        }
+      }
+      // console.log(horizontalCounterX);
+    }
+  };
 
   board.forEach((row) => {
     if (!currentX) {
@@ -67,12 +106,16 @@ const findC4Winner = (board) => {
 
     checkVerticals();
 
+    checkHorizontals(row);
+
     rowIndexX++;
     rowIndexO++;
   });
 
   if (verticalCounterO === 3) return 'o';
   if (verticalCounterX === 3) return 'x';
+  if (horizontalCounterO === 3) return 'o';
+  if (horizontalCounterX === 3) return 'x';
   if (!currentX && !currentO) return false;
   if (verticalCounterX !== 3 && verticalCounterO !== 3) noWinner = true;
   if (noWinner) return false;
