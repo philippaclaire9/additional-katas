@@ -25,6 +25,7 @@ const findC4Winner = (board) => {
   let verticalCounterO = 0;
   let horizontalIndexO = 0;
   let horizontalCounterO = 0;
+  let testHorizontalCounterO = 0;
 
   const checkVerticals = () => {
     if (currentO) {
@@ -45,14 +46,42 @@ const findC4Winner = (board) => {
 
   const checkHorizontals = (row) => {
     if (currentO) {
-      row.forEach((space) => {
-        // console.log(rowIndexO, horizontalIndexO + 1);
-        if (board[rowIndexO][horizontalIndexO + 1] === currentO) {
-          horizontalCounterO++;
-          horizontalIndexO++;
-          // console.log(horizontalCounterO);
-        }
-      });
+      // row.forEach((space) => {
+      //   // console.log(rowIndexO, horizontalIndexO + 1);
+      //   if (board[rowIndexO][horizontalIndexO + 1] === currentO) {
+      //     horizontalCounterO++;
+      //     horizontalIndexO++;
+      //     // console.log(horizontalCounterO);
+      //   }
+      // });
+      // if (horizontalCounterO !== 3) {
+      //   if (rowIndexO <= 4) {
+      //     if (board[rowIndexO + 1].includes('o')) {
+      //       horizontalIndexO = board[rowIndexO + 1].findIndex((o) => o === 'o');
+      //       horizontalCounterO = 0;
+      //       row.forEach((space) => {
+      //         if (board[rowIndexO + 1][horizontalIndexO + 1] === currentO) {
+      //           horizontalCounterO++;
+      //           horizontalIndexO++;
+      //         }
+      //       });
+      //     }
+      //   }
+
+      // }
+
+      if (horizontalCounterO !== 4) {
+        row.forEach((space) => {
+          if (horizontalCounterO !== 4) {
+            if (space === 'o') {
+              horizontalCounterO++;
+            }
+            if (space === 'x' && horizontalCounterO > 0) {
+              horizontalCounterO--;
+            }
+          }
+        });
+      }
     }
 
     if (currentX) {
@@ -83,6 +112,7 @@ const findC4Winner = (board) => {
   };
 
   board.forEach((row) => {
+    horizontalCounterO = 0;
     if (!currentX) {
       row.forEach((space) => {
         if (space === 'x') {
@@ -105,16 +135,17 @@ const findC4Winner = (board) => {
     }
 
     checkVerticals();
-
-    checkHorizontals(row);
-
+    if (horizontalCounterO !== 4) {
+      checkHorizontals(row);
+    }
     rowIndexX++;
     rowIndexO++;
   });
 
+  if (horizontalCounterO === 4) return 'o';
   if (verticalCounterO === 3) return 'o';
   if (verticalCounterX === 3) return 'x';
-  if (horizontalCounterO === 3) return 'o';
+  //if (horizontalCounterO === 3) return 'o';
   if (horizontalCounterX === 3) return 'x';
   if (!currentX && !currentO) return false;
   if (verticalCounterX !== 3 && verticalCounterO !== 3) noWinner = true;
