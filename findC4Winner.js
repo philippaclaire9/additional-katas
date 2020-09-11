@@ -25,7 +25,7 @@ const findC4Winner = (board) => {
   let verticalCounterO = 0;
   let horizontalIndexO = 0;
   let horizontalCounterO = 0;
-  let testHorizontalCounterO = 0;
+  let horizontalWinnerO = false;
 
   const checkVerticals = () => {
     if (currentO) {
@@ -70,18 +70,21 @@ const findC4Winner = (board) => {
 
       // }
 
-      if (horizontalCounterO !== 4) {
-        row.forEach((space) => {
-          if (horizontalCounterO !== 4) {
-            if (space === 'o') {
-              horizontalCounterO++;
-            }
-            if (space === 'x' && horizontalCounterO > 0) {
-              horizontalCounterO--;
-            }
+      row.forEach((space) => {
+        // console.log(horizontalCounterO);
+        if (horizontalCounterO === 4) {
+          horizontalWinnerO = true;
+        }
+        if (horizontalCounterO !== 4) {
+          if (space === 'o') {
+            horizontalCounterO++;
           }
-        });
-      }
+          if (space === 'x' && horizontalCounterO > 0) {
+            horizontalCounterO--;
+          }
+        }
+      });
+      //console.log(horizontalCounterO);
     }
 
     if (currentX) {
@@ -135,6 +138,7 @@ const findC4Winner = (board) => {
     }
 
     checkVerticals();
+
     if (horizontalCounterO !== 4) {
       checkHorizontals(row);
     }
@@ -143,6 +147,7 @@ const findC4Winner = (board) => {
   });
 
   if (horizontalCounterO === 4) return 'o';
+  if (horizontalWinnerO === true) return 'o';
   if (verticalCounterO === 3) return 'o';
   if (verticalCounterX === 3) return 'x';
   //if (horizontalCounterO === 3) return 'o';
